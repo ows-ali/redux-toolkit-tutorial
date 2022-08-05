@@ -5,12 +5,16 @@ import "./App.css";
 import TodoItem from "./components/TodoItem";
 import { useSelector, useDispatch } from "react-redux";
 import { addTodo, removeTodo } from "./features/todoSlice";
+import { incCounter, decCounter } from "./features/counterSlice";
 
 function App() {
    const [input, setInput] = useState("");
 
    const count = useSelector((state) => state.todo.count);
    const todos = useSelector((state) => state.todo.todos);
+
+   const counter = useSelector((state) => state.counter.counter);
+
    const dispatch = useDispatch();
 
    const handleAddTodo = (e) => {
@@ -21,6 +25,16 @@ function App() {
    const handleTodoDone = (id) => {
      dispatch(removeTodo(id));
    };
+
+
+   const increment = () => {
+    dispatch(incCounter());
+  };
+
+
+  const decrement = () => {
+    dispatch(decCounter());
+  };
    return (
      <div className="App">
       
@@ -53,7 +67,7 @@ function App() {
 
       <h2>Redux toolkit project</h2>
       <i>Intro to redux is required before using redux toolkit</i>
-      <p>We dont have to worry about returning a copy using ... operator or Object.assign() it automatically triggers state change, and we can use functions like .push()</p>
+
 
        <h1>TODO List</h1>
        <form className="App-form" onSubmit={handleAddTodo}>
@@ -71,7 +85,13 @@ function App() {
              />
            ))}
          {count === 0 && <p>No todos</p>}
+
        </div>
+       <h2>
+        Redux toolkit counter
+       </h2>
+       <button onClick={increment}>Increment</button>
+       {counter}
      </div>
    );
  }

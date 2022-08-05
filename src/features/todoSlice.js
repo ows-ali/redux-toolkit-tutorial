@@ -16,6 +16,8 @@ export const todoSlice = createSlice({
       };
       state.todos.push(todo);
       state.count += 1;
+    //   retun state
+    
     },
     removeTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
